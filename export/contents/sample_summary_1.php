@@ -25,10 +25,10 @@
 
                     require_once('../include/database.php');
                     $originator="anwar";
-                    $project_id=1;
+                    $user_id=1;
                     ?>
                     <?php
-                    $ssql="SELECT * FROM sample_request where project_id='$project_id'";
+                    $ssql="SELECT * FROM sample_request where originator='$originator'";
 
                     $result = $database->query($ssql);
                     $nextId=1;
