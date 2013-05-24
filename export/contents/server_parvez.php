@@ -18,8 +18,6 @@ VALUES ('$project_status', '$originator', '$originator_email', '$project_name', 
 
 $database->query($mysql);
 echo '<script type="text/javascript">
-		
-		window.location="../halifax.php";
-		
+		window.location="sample_request.php";
 		</script>"';
 ?>

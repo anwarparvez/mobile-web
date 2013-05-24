@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<?php session_start(); ?>
 <?php
 require_once('../include/database.php');
 if(isset ($_POST['save'])) {
@@ -22,7 +21,11 @@ if(isset ($_POST['save'])) {
         //echo "Found";
         }
     }
+    echo '<script type="text/javascript">
+		window.location="reporting_parvez.php";
+		</script>"';
 }
+
 ?>
 <html>
     <head>

@@ -47,7 +47,7 @@
                 ?>
 
             <div data-role = "content" id="mainContent" >
-                <form action="contents/server.php" method="post" onSubmit="return checkForm()" data-ajax="false" >
+                <form action="contents/server_parvez.php" method="post" onSubmit="return checkForm()" data-ajax="false" >
                     <select class="dropfield ajax3" name="project_status" id="project_name" rowId="0" >
                         <option value="-1">Select a project status</option>
                         <option value="OPEN">OPEN</option>
@@ -186,14 +186,14 @@
                     <hr/>
                     <br/>
 
-                    <input type="submit" value="Save" name="save" rowId="0"  class="ajax4" data-role="button" data-icon="plus" />
+                    <input type="submit" value="Add Product Sample" name="save" rowId="0"  class="ajax4" data-role="button" data-icon="plus" />
                     <a href="contents/reporting_parvez.php" target="_blank" data-ajax="false" data-role="button" data-icon="grid">Reporting</a>
                 </form>
             </div><!-- /content -->
             <?php } else {
                 ?>
             <div data-role = "content" id="mainContent" >
-                <form action="contents/server.php" method="post" onSubmit="return checkForm()" data-ajax="false" >
+                <form action="contents/server_parvez.php" method="post" onSubmit="return checkForm()" data-ajax="false" >
                     <select class="dropfield ajax3" name="project_status" id="project_name" rowId="0" >
                         <option value="-1">Select a project status</option>
                         <option value="OPEN">OPEN</option>
@@ -343,61 +343,13 @@
                     <hr/>
                     <br/>
 
-                    <input type="submit" value="Save" name="save" rowId="0"  class="ajax4" data-role="button" data-icon="plus" />
+                    <input type="submit" value="Add Product Sample" name="save" rowId="0"  class="ajax4" data-role="button" data-icon="plus" />
                     <a href="contents/reporting_parvez.php" target="_blank" data-ajax="false" data-role="button" data-icon="grid">Reporting</a>
                 </form>
 
             </div><!-- /content -->
             <?php }
             ?>
-
-
-            <div  data-role = "content" id="productSample" style="max-width:700px" >
-
-                <script>
-                    $(document).on("pageinit", function() {
-                        var nextId = 1;
-
-                        $("#add").click(function() {
-                            nextId++;
-                            var content = "<div data-role='content' id='set" + nextId + "'>               <div class='ui-grid-b'><div class='ui-block-a'><input type='text' name='product[]' placeholder='product'  class='ajax3' /></div><div class='ui-block-b'><input type='text' name='colour[]'  placeholder='colour'  class='ajax3' /></div><div class='ui-block-c'><input type='text' name='finish[]'  placeholder='Finish'  class='ajax3' /></div></div></div>";
-
-                            $("#set").append( content ).collapsibleset('refresh');
-                        });
-
-                        //                    $("#expand").click(function() {
-                        //                        $("#set").children(":last").trigger( "expand" );
-                        //                    });
-                        //
-                        //                    $("#collapse").click(function() {
-                        //                        $("#set").children(":last").trigger( "collapse" );
-                        //                    });
-                    });
-                </script>
-
-                <div data-role="content">
-                    <div data-role="header" data-theme="d">
-                        <h1>Sample Request Summary</h1>
-
-                    </div>
-
-                    <button type="button" data-icon="gear" data-theme="b" data-iconpos="right" data-mini="true" data-inline="true" id="add">Add</button>
-                    <!--   <button type="button" data-icon="plus" data-theme="b" data-iconpos="right" data-mini="true" data-inline="true" id="expand">Expand last</button>
-                       <button type="button" data-icon="minus" data-theme="b" data-iconpos="right" data-mini="true" data-inline="true" id="collapse">Collapse last</button>
-                    -->
-                    <div data-role="collapsible-set" data-content-theme="d" id="set">
-                        <div class="ui-grid-b">
-                            <div class="ui-block-a"><h4>Product</h4></div>
-                            <div class="ui-block-b"><h4>Colour</h4></div>
-                            <div class="ui-block-c"><h4>Finish</h4></div>
-                        </div>
-                    </div>
-
-
-                </div>
-
-            </div>
-
 
         </div> <!--page -->
 

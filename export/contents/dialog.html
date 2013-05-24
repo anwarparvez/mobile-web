@@ -22,7 +22,35 @@
                  <h1>Sample Request Summary</h1>
                 <div class="ui-grid-b">
 
+
+
                    1. James hardle InVibe Bianc Chrome Sheild 201
+
+                     <?php
+
+                            require_once('../include/database.php');
+                            $user_id=1;
+                            ?>
+                            <?php
+                            $ssql="SELECT * FROM sample_request where user_id='$user_id'";
+
+                            $result = $database->query($ssql);
+                            $nextId=1;
+                            while ($row = mysql_fetch_array($result)) {
+                                $value=$row['product'];
+                                $finish=$row['finish'];
+                                $colour=$row['colour'];
+                                ?>
+                            <div class='ui-grid-b'>
+                                <div class='ui-block-a'><?php echo $value?>
+                                </div>
+                                <div class='ui-block-b'><?php echo $colour?>
+                                </div>
+                                <div class='ui-block-c'><?php echo $finish?>
+                                </div>
+                            </div>
+                                <?php
+                                $nextId++;}  ?>
                 </div>
                 <div class="ui-grid-a">
                     <div class="ui-block-a"> <a href="dialog/index.html" data-role="button"  data-theme="back">Finish And Submit</a></div>
