@@ -26,19 +26,6 @@
         <div data-role="dialog">
             <form action="" method="post"  data-ajax="false" >
                 <div  data-role = "content" id="productSample" style="max-width:700px" >
-                    <script>
-                        $(document).on("pageinit", function() {
-                            var nextId = 1;
-
-                            $("#add").click(function() {
-                                nextId++;
-                                var content = "<div data-role='content' id='set" + nextId + "'>               <div class='ui-grid-b'><div class='ui-block-a'><input type='text' name='product[]' placeholder='product'  /></div><div class='ui-block-b'><input type='text' name='colour[]'  placeholder='colour' /></div><div class='ui-block-c'><input type='text' name='finish[]'  placeholder='Finish' /></div></div></div>";
-
-                                $("#set").append( content ).collapsibleset('refresh');
-                            });
-
-                        });
-                    </script>
 
                     <div data-role="content">
                         <div data-role="header" data-theme="d">
@@ -58,9 +45,8 @@
 
                             require_once('../include/database.php');
                             $project_id=1;
-                            ?>
-                            <?php
                             $ssql="SELECT * FROM sample_request where project_id='$project_id'";
+                            $content='';
 
                             $result = $database->query($ssql);
                             $nextId=1;
@@ -68,18 +54,25 @@
                                 $value=$row['product'];
                                 $finish=$row['finish'];
                                 $colour=$row['colour'];
-                                ?>
-                            <div class='ui-grid-b'>
-                                <div class='ui-block-a'><?php echo $value?> 
-                                </div>
-                                <div class='ui-block-b'><?php echo $colour?>
-                                </div>
-                                <div class='ui-block-c'><?php echo $finish?>
-                                </div>
-                            </div>
-                                <?php
+                                $content.= "<div data-role='content' id='set".nextId."'><div class='ui-grid-b'><div class='ui-block-a'><input type='text' name='product[]' placeholder='product' value='".$value."' /></div><div class='ui-block-b'><input type='text' name='colour[]'  placeholder='colour' value='$colour' /></div><div class='ui-block-c'><input type='text' name='finish[]'  placeholder='Finish' value='$finish'/></div></div></div>";
                                 $nextId++;}  ?>
                         </div>
+                        <script>
+                            $(document).on("pageinit", function() {
+                                var nextId = <?php echo $nextId?>;
+
+                                var scontent = "<?php echo $content ?>";
+                                $("#set").append( scontent ).collapsibleset('refresh');
+                                $("#add").click(function() {
+                                    nextId++;
+                                    var content = "<div data-role='content' id='set" + nextId + "'><div class='ui-grid-b'><div class='ui-block-a'><input type='text' name='product[]' placeholder='product'  /></div><div class='ui-block-b'><input type='text' name='colour[]'  placeholder='colour' /></div><div class='ui-block-c'><input type='text' name='finish[]'  placeholder='Finish' /></div></div></div>";
+
+                                    $("#set").append( content ).collapsibleset('refresh');
+                                });
+
+                            });
+                        </script>
+
                     </div>
                     <input type="submit" value="save" name="save"  />
                 </div>

@@ -5,8 +5,8 @@ if(isset ($_POST['save'])) {
     $product=$_POST['product'];
     $project_id=1;
     $i=0;
-    //$dsql="DELETE FROM sample_request where user_id = '$user_id' ";
-    //$database->query($dsql);
+    $dsql="DELETE FROM sample_request where project_id = '$project_id' ";
+    $database->query($dsql);
     foreach ($product as $value) {
         if($value!=NULL) {
         // echo $value;
