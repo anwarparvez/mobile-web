@@ -54,40 +54,6 @@
                 </table>
 
 
-      
-                <div  id="dialog_id" data-role="dialog">
-                    <div data-role="header" data-theme="d">
-                        <h1>Sample Request Summary</h1>
-
-                    </div>
-
-                    <button type="button" data-icon="gear" data-theme="b" data-iconpos="right" data-mini="true" data-inline="true" id="add">Add</button>
-                    <button type="button" data-icon="plus" data-theme="b" data-iconpos="right" data-mini="true" data-inline="true" id="expand">Expand last</button>
-                    <button type="button" data-icon="minus" data-theme="b" data-iconpos="right" data-mini="true" data-inline="true" id="collapse">Collapse last</button>
-                    <div data-role="collapsible-set" data-content-theme="d" id="set">
-                        <div data-role="collapsible" id="set1" data-collapsed="true">
-                            <h3>Section 1</h3>
-                            <p>I'm the collapsible content.</p>
-                        </div>
-                    </div>
-
-
-
-                    <div data-role="content" data-theme="c">
-
-                        <h1>Sample Request Summary</h1>
-                        <div class="ui-grid-b">
-
-                            1. James hardle InVibe Bianc Chrome Sheild 201
-                        </div>
-                        <div class="ui-grid-a">
-                            <div class="ui-block-a"> <a href="dialog/index.html" data-role="button" data-rel="back" data-theme="b">Finish And Submit</a></div>
-                            <div class="ui-block-b"><a href="dialog/index.html" data-role="button" data-rel="back" data-theme="c">Edit Sample Request</a></div>
-                        </div>
-
-
-                    </div>
-                </div>
             </div><!-- /content -->
 
     </body>

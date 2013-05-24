@@ -1,4 +1,29 @@
 <!DOCTYPE html>
+<?php session_start(); ?>
+<?php
+require_once('../include/database.php');
+if(isset ($_POST['save'])) {
+    $product=$_POST['product'];
+    $user_id=1;
+    $i=0;
+    //$dsql="DELETE FROM sample_request where user_id = '$user_id' ";
+    //$database->query($dsql);
+    foreach ($product as $value) {
+        if($value!=NULL) {
+        // echo $value;
+            $colour=$_POST['colour'][$i];
+            $finish=$_POST['finish'][$i];
+
+            $sql="INSERT INTO sample_request (_id ,user_id ,product ,colour ,finish) VALUES (NULL , '$user_id', '$value', '$colour', '$finish');";
+
+            //echo $sql;
+            $database->query($sql);
+            $i++;
+        //echo "Found";
+        }
+    }
+}
+?>
 <html>
     <head>
         <title>Halifax</title>
@@ -23,7 +48,7 @@
     </head>
     <body>
         <div data-role="page">
-            <form action="submit_php.php" method="post"  data-ajax="false" >
+            <form action="" method="post"  data-ajax="false" >
                 <div  data-role = "content" id="productSample" style="max-width:700px" >
                     <script>
                         $(document).on("pageinit", function() {
@@ -55,7 +80,7 @@
                             </div>
                             <?php
 
-                            require_once('include/database.php');
+                            require_once('../include/database.php');
                             $user_id=1;
                             ?>
                             <?php
@@ -80,8 +105,9 @@
                                 $nextId++;}  ?>
                         </div>
                     </div>
+                    <input type="submit" value="save" name="save"  />
                 </div>
-                <input type="submit" value="Save" name="save"  />
+
             </form>
 
         </div> <!--page -->
