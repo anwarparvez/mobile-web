@@ -1,32 +1,5 @@
 <!DOCTYPE html>
-<?php
-require_once('../include/database.php');
-if(isset ($_POST['save'])) {
-    $product=$_POST['product'];
-    $project_id=1;
-    $i=0;
-    //$dsql="DELETE FROM sample_request where user_id = '$user_id' ";
-    //$database->query($dsql);
-    foreach ($product as $value) {
-        if($value!=NULL) {
-        // echo $value;
-            $colour=$_POST['colour'][$i];
-            $finish=$_POST['finish'][$i];
 
-            $sql="INSERT INTO sample_request (_id ,project_id ,product ,colour ,finish) VALUES (NULL , '$project_id', '$value', '$colour', '$finish');";
-
-            //echo $sql;
-            $database->query($sql);
-            $i++;
-        //echo "Found";
-        }
-    }
-    echo '<script type="text/javascript">
-		window.location="reporting_parvez.php";
-		</script>"';
-}
-
-?>
 <html>
     <head>
         <title>Halifax</title>
@@ -50,7 +23,7 @@ if(isset ($_POST['save'])) {
 
     </head>
     <body>
-        <div data-role="page">
+        <div data-role="dialog">
             <form action="" method="post"  data-ajax="false" >
                 <div  data-role = "content" id="productSample" style="max-width:700px" >
                     <script>
