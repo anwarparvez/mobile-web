@@ -56,7 +56,7 @@
                     </ol>
                 </div>
                 <div class="ui-grid-a">
-                    <div class="ui-block-a"> <a href="dialog/index.html" data-role="button"data-rel="back" data-theme="b"  >Finish And Submit</a></div>
+                    <div class="ui-block-a"> <a href="reporting.php" data-role="button"data-rel="redirect" data-theme="b"  >Finish And Submit</a></div>
                     <div class="ui-block-b"><a href="sample_request.php" data-role="button"  data-theme="c">Edit Sample Request</a></div>
                 </div>
             </div>

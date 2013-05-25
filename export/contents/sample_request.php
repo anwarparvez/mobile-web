@@ -13,9 +13,7 @@ if(isset ($_POST['save'])) {
         // echo $value;
             $colour=$_POST['colour'][$i];
             $finish=$_POST['finish'][$i];
-
             $sql="INSERT INTO sample_request (_id ,project_id ,product ,colour ,finish) VALUES (NULL , '$project_id', '$value', '$colour', '$finish');";
-
             //echo $sql;
             $database->query($sql);
             $i++;
