@@ -39,7 +39,6 @@
                                 $finish=$row['finish'];
                                 $colour=$row['colour'];
                                 ?>
-
                         <li>
                             <p>
                                 James hardle
@@ -47,10 +46,7 @@
                                         <?php echo $colour?>
                                         <?php echo $finish?>
                             </p>
-
                         </li>
-
-
                                 <?php
 
                                 $nextId++;}

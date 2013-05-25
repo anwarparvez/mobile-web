@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <?php
 require_once('../include/database.php');
+require_once ('../contents/helper.php');
 if(isset ($_POST['save'])) {
     $product=$_POST['product'];
     $project_id=1;
@@ -68,39 +69,60 @@ if(isset ($_POST['save'])) {
                                 <div class="ui-block-b"><h4>Colour</h4></div>
                                 <div class="ui-block-c"><h4>Finish</h4></div>
                             </div>
-                            <?php
+                                <?php
+                               /* function sample_product_html($project_id=1) {
+                                    $ssql="SELECT * FROM sample_request where project_id='$project_id'";
+                                    $content='';
+                                    $result = $database->query($ssql);
+                                    $nextId=1;
+                                    if($result) {
+                                        while ($row = mysql_fetch_array($result)) {
 
-                            require_once('../include/database.php');
-                            $project_id=1;
-                            $ssql="SELECT * FROM sample_request where project_id='$project_id'";
-                            $content='';
+                                            $value=$row['product'];
+                                            $finish=$row['finish'];
+                                            $colour=$row['colour'];
+                                            $content.= "<div data-role='content' id='set".nextId."'><div class='ui-grid-b'><div class='ui-block-a'><input type='text' name='product[]' placeholder='product' value='".$value."' /></div>";
+                                            $content.="<div class='ui-block-b'>".coloue_input_html(1)."</div>";
+                                            $content.="<div class='ui-block-c'><input type='text' name='finish[]'  placeholder='Finish' value='$finish'/></div></div></div>";
+                                            $nextId++;
+                                        }
+                                    }
+                                    return $content;
+                                }*/
+                                $project_id=1;
+                                $ssql="SELECT * FROM sample_request where project_id='$project_id'";
+                                $content='';
+                                $result = $database->query($ssql);
+                                $nextId=1;
+                                if($result) {
+                                    while ($row = mysql_fetch_array($result)) {
+                                        $value=$row['product'];
+                                        $finish=$row['finish'];
+                                        $colour=$row['colour'];
+                                        // $content.= "<div data-role='content' id='set".nextId."'><div class='ui-grid-b'><div class='ui-block-a'><input type='text' name='product[]' placeholder='product' value='".$value."' /></div><div class='ui-block-b'><input type='text' name='colour[]'  placeholder='colour' value='$colour' /></div><div class='ui-block-c'><input type='text' name='finish[]'  placeholder='Finish' value='$finish'/></div></div></div>";
+                                        $content.= "<div data-role='content' id='set".nextId."'><div class='ui-grid-b'><div class='ui-block-a'><input type='text' name='product[]' placeholder='product' value='".$value."' /></div>";
+                                        $content.="<div class='ui-block-b'>".coloue_input_html($colour)."</div>";
+                                        $content.="<div class='ui-block-c'><input type='text' name='finish[]'  placeholder='Finish' value='$finish'/></div></div></div>";
+                                        $nextId++;
+                                    }
+                                }
+                                ?>
+                            </div>
+                            <script>
+                                $(document).on("pageinit", function() {
+                                    var nextId = <?php echo $nextId?>;
 
-                            $result = $database->query($ssql);
-                            $nextId=1;
-                            if($result) {
-                                while ($row = mysql_fetch_array($result)) {
-                                    $value=$row['product'];
-                                    $finish=$row['finish'];
-                                    $colour=$row['colour'];
-                                    $content.= "<div data-role='content' id='set".nextId."'><div class='ui-grid-b'><div class='ui-block-a'><input type='text' name='product[]' placeholder='product' value='".$value."' /></div><div class='ui-block-b'><input type='text' name='colour[]'  placeholder='colour' value='$colour' /></div><div class='ui-block-c'><input type='text' name='finish[]'  placeholder='Finish' value='$finish'/></div></div></div>";
-                                    $nextId++;}
-                            } ?>
-                        </div>
-                        <script>
-                            $(document).on("pageinit", function() {
-                                var nextId = <?php echo $nextId?>;
+                                    var scontent = "<?php echo $content ?>";
+                                    $("#set").append( scontent ).collapsibleset('refresh');
+                                    $("#add").click(function() {
+                                        nextId++;
+                                        var content = "<div data-role='content' id='set" + nextId + "'><div class='ui-grid-b'><div class='ui-block-a'><input type='text' name='product[]' placeholder='product'  /></div><div class='ui-block-b'><?php echo coloue_input_html()?></div><div class='ui-block-c'><input type='text' name='finish[]'  placeholder='Finish' /></div></div></div>";
 
-                                var scontent = "<?php echo $content ?>";
-                                $("#set").append( scontent ).collapsibleset('refresh');
-                                $("#add").click(function() {
-                                    nextId++;
-                                    var content = "<div data-role='content' id='set" + nextId + "'><div class='ui-grid-b'><div class='ui-block-a'><input type='text' name='product[]' placeholder='product'  /></div><div class='ui-block-b'><input type='text' name='colour[]'  placeholder='colour' /></div><div class='ui-block-c'><input type='text' name='finish[]'  placeholder='Finish' /></div></div></div>";
+                                        $("#set").append( content ).collapsibleset('refresh');
+                                    });
 
-                                    $("#set").append( content ).collapsibleset('refresh');
                                 });
-
-                            });
-                        </script>
+                            </script>
 
                     </div>
                     <input type="submit" value="save" name="save"  />
