@@ -21,9 +21,9 @@ if(isset ($_POST['save'])) {
         //echo "Found";
         }
     }
-    echo '<script type="text/javascript">
+   /* echo '<script type="text/javascript">
 		window.location="reporting.php";
-		</script>"';
+		</script>"';*/
 }
 
 ?>

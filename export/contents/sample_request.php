@@ -77,12 +77,14 @@ if(isset ($_POST['save'])) {
 
                             $result = $database->query($ssql);
                             $nextId=1;
-                            while ($row = mysql_fetch_array($result)) {
-                                $value=$row['product'];
-                                $finish=$row['finish'];
-                                $colour=$row['colour'];
-                                $content.= "<div data-role='content' id='set".nextId."'><div class='ui-grid-b'><div class='ui-block-a'><input type='text' name='product[]' placeholder='product' value='".$value."' /></div><div class='ui-block-b'><input type='text' name='colour[]'  placeholder='colour' value='$colour' /></div><div class='ui-block-c'><input type='text' name='finish[]'  placeholder='Finish' value='$finish'/></div></div></div>";
-                                $nextId++;}  ?>
+                            if($result) {
+                                while ($row = mysql_fetch_array($result)) {
+                                    $value=$row['product'];
+                                    $finish=$row['finish'];
+                                    $colour=$row['colour'];
+                                    $content.= "<div data-role='content' id='set".nextId."'><div class='ui-grid-b'><div class='ui-block-a'><input type='text' name='product[]' placeholder='product' value='".$value."' /></div><div class='ui-block-b'><input type='text' name='colour[]'  placeholder='colour' value='$colour' /></div><div class='ui-block-c'><input type='text' name='finish[]'  placeholder='Finish' value='$finish'/></div></div></div>";
+                                    $nextId++;}
+                            } ?>
                         </div>
                         <script>
                             $(document).on("pageinit", function() {

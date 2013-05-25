@@ -6,4 +6,4 @@ colour VARCHAR( 20 ) NOT NULL ,
 finish VARCHAR( 20 ) NOT NULL
 ) ENGINE = MYISAM
 
- ALTER TABLE sample_request CHANGE user_id project_id INT( 11 ) NOT NULL
+

@@ -33,26 +33,29 @@
                     $result = $database->query($ssql);
                     $nextId=1;
                     ?><ol><?php
-                        while ($row = mysql_fetch_array($result)) {
-                            $value=$row['product'];
-                            $finish=$row['finish'];
-                            $colour=$row['colour'];
-                            ?>
+                        if($result) {
+                            while ($row = mysql_fetch_array($result)) {
+                                $value=$row['product'];
+                                $finish=$row['finish'];
+                                $colour=$row['colour'];
+                                ?>
 
                         <li>
                             <p>
                                 James hardle
-                                    <?php echo $value?>
-                                    <?php echo $colour?>
-                                    <?php echo $finish?>
+                                        <?php echo $value?>
+                                        <?php echo $colour?>
+                                        <?php echo $finish?>
                             </p>
 
                         </li>
 
 
-                            <?php
+                                <?php
 
-                            $nextId++;}  ?>
+                                $nextId++;}
+                        }
+                        ?>
                     </ol>
                 </div>
                 <div class="ui-grid-a">
