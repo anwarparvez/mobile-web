@@ -1,4 +1,29 @@
 <!DOCTYPE html>
+<?php
+require_once('include/database.php');
+if(isset ($_POST['save'])) {
+    $product=$_POST['product'];
+    $project_id=1;
+    $i=0;
+    $dsql="DELETE FROM sample_request where project_id = '$project_id' ";
+    $database->query($dsql);
+    foreach ($product as $value) {
+        if($value!=NULL) {
+        // echo $value;
+            $colour=$_POST['colour'][$i];
+            $finish=$_POST['finish'][$i];
+
+            $sql="INSERT INTO sample_request (_id ,project_id ,product ,colour ,finish) VALUES (NULL , '$project_id', '$value', '$colour', '$finish');";
+
+            //echo $sql;
+            $database->query($sql);
+            $i++;
+        //echo "Found";
+        }
+    }
+}
+
+?>
 <html>
     <head>
         <title>Halifax</title>
@@ -174,7 +199,7 @@
                     <hr/>
                     <br/>
 
-                    <input type="submit" value="Add Product Sample" name="save" rowId="0"  class="ajax4" data-role="button" data-icon="plus" />
+                    <input type="submit" value="save" name="save" rowId="0"  class="ajax4" data-role="button" data-icon="plus" />
                     <a href="contents/reporting.php" target="_blank" data-ajax="false" data-role="button" data-icon="grid">Reporting</a>
                 </form>
             </div><!-- /content -->
@@ -331,14 +356,70 @@
                     <hr/>
                     <br/>
 
-                    <input type="submit" value="Add Product Sample" name="save" rowId="0"  class="ajax4" data-role="button" data-icon="plus" />
+                    <input type="submit" value="Save" name="save" rowId="0"  class="ajax4" data-role="button" data-icon="plus" />
                     <a href="contents/reporting_parvez.php" target="_blank" data-ajax="false" data-role="button" data-icon="grid">Reporting</a>
                 </form>
 
             </div><!-- /content -->
             <?php }
             ?>
+            <div data-role="content">
+                <form action="" method="post"  data-ajax="false" >
+                    <div  data-role = "content" id="productSample" style="max-width:700px" >
 
+                        <div data-role="content">
+                            <div data-role="header" data-theme="d">
+                                <h1>Product Sample</h1>
+
+                            </div>
+
+                            <button type="button" data-icon="gear" data-theme="b" data-iconpos="right" data-mini="true" data-inline="true" id="add">Add Product Sample</button>
+
+                            <div data-role="collapsible-set" data-content-theme="d" id="set">
+                                <div class="ui-grid-b">
+                                    <div class="ui-block-a"><h4>Product</h4></div>
+                                    <div class="ui-block-b"><h4>Colour</h4></div>
+                                    <div class="ui-block-c"><h4>Finish</h4></div>
+                                </div>
+                                <?php
+                                $project_id=1;
+                                $ssql="SELECT * FROM sample_request where project_id='$project_id'";
+                                $content='';
+
+                                $result = $database->query($ssql);
+                                $nextId=1;
+                                if($result) {
+                                    while ($row = mysql_fetch_array($result)) {
+                                        $value=$row['product'];
+                                        $finish=$row['finish'];
+                                        $colour=$row['colour'];
+                                        $content.= "<div data-role='content' id='set".nextId."'><div class='ui-grid-b'><div class='ui-block-a'><input type='text' name='product[]' placeholder='product' value='".$value."' /></div><div class='ui-block-b'><input type='text' name='colour[]'  placeholder='colour' value='$colour' /></div><div class='ui-block-c'><input type='text' name='finish[]'  placeholder='Finish' value='$finish'/></div></div></div>";
+                                        $nextId++;}
+                                } ?>
+                            </div>
+                            <script>
+                                $(document).on("pageinit", function() {
+                                    var nextId = <?php echo $nextId?>;
+
+                                    var scontent = "<?php echo $content ?>";
+                                    $("#set").append( scontent ).collapsibleset('refresh');
+                                    $("#add").click(function() {
+                                        nextId++;
+                                        var content = "<div data-role='content' id='set" + nextId + "'><div class='ui-grid-b'><div class='ui-block-a'><input type='text' name='product[]' placeholder='product'  /></div><div class='ui-block-b'><input type='text' name='colour[]'  placeholder='colour' /></div><div class='ui-block-c'><input type='text' name='finish[]'  placeholder='Finish' /></div></div></div>";
+
+                                        $("#set").append( content ).collapsibleset('refresh');
+                                    });
+
+                                });
+                            </script>
+
+                        </div>
+                        <input type="submit" value="save" name="save"  />
+                    </div>
+
+                </form>
+
+            </div> <!--page -->
         </div> <!--page -->
 
 
