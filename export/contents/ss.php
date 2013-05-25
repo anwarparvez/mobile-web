@@ -16,7 +16,7 @@ require_once 'helper.php';
             <?php
             require_once('../include/database.php');
             $originator = "anwar";
-            $project_id = 1;
+            //$project_id = 1;
             ?>
             <?php
             $ssql = "SELECT * FROM sample_request where project_id='$project_id'";

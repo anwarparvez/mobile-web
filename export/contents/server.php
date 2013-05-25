@@ -1,12 +1,9 @@
-<?php session_start(); ?>
-
 <?php
+
+session_start();
 
 require_once('filter.php');
 require_once('../include/database.php');
-?>
-
-<?php
 
 //set value for table display
 if (isset($project_status) && isset($originator) && isset($originator_email) && isset($project_name) && isset($site_address) && isset($project_description) && isset($suburb) && isset($postcode) && isset($source) && isset($follow_up_date)) {
@@ -17,6 +14,41 @@ VALUES ('$project_status', '$originator', '$originator_email', '$project_name', 
 }
 
 $database->query($mysql);
+
+
+if (isset($_POST['rowId'])) {
+    $project_id = $_POST['rowId'];
+} else {
+    $project_id = mysql_insert_id();
+}
+$product = $_POST['sproduct'];
+$i = 0;
+
+//print_r($product);
+//if (isset($_POST['save'])) {
+$dsql = "DELETE FROM sample_request where project_id = '$project_id' ";
+$database->query($dsql);
+//}
+foreach ($product as $value) {
+    if ($value != NULL) {
+        // echo $value;
+        $colour = $_POST['colour'][$i];
+        $finish = $_POST['finish'][$i];
+
+        $sql = "INSERT INTO sample_request (_id ,project_id ,product ,colour ,finish) VALUES (NULL , '$project_id', '$value', '$colour', '$finish');";
+
+        //echo $sql;
+        $database->query($sql);
+        $i++;
+        //echo "Found";
+    }
+}
+?>
+
+
+
+<?php
+
 echo '<script type="text/javascript">
 		window.location="reporting.php";
 		</script>"';

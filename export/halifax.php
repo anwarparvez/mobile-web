@@ -2,29 +2,6 @@
 <?php
 require_once 'include/database.php';
 require_once ('contents/helper.php');
-if (isset($_POST['save']) || isset($_POST['save1'])) {
-    $product = $_POST['product'];
-    $project_id = 1;
-    $i = 0;
-    if (isset($_POST['save'])) {
-        $dsql = "DELETE FROM sample_request where project_id = '$project_id' ";
-        $database->query($dsql);
-    }
-    foreach ($product as $value) {
-        if ($value != NULL) {
-            // echo $value;
-            $colour = $_POST['colour'][$i];
-            $finish = $_POST['finish'][$i];
-
-            $sql = "INSERT INTO sample_request (_id ,project_id ,product ,colour ,finish) VALUES (NULL , '$project_id', '$value', '$colour', '$finish');";
-
-            //echo $sql;
-            $database->query($sql);
-            $i++;
-            //echo "Found";
-        }
-    }
-}
 ?>
 <html>
     <head>
@@ -49,20 +26,21 @@ if (isset($_POST['save']) || isset($_POST['save1'])) {
 
     </head>
     <body>
+        <form action="contents/server.php" method="post" onSubmit="return checkForm()" data-ajax="false" >
 
-        <div data-role="page">
+            <div data-role="page">
 
-            <div data-role="header">
-                <h1>Halifax</h1>
-            </div><!-- /header -->
-            <?php
-            $u_agent = $_SERVER['HTTP_USER_AGENT'];
-
-            if (!preg_match('/MSIE/i', $u_agent)) {
-            ?>
-
+                <div data-role="header">
+                    <h1>Halifax</h1>
+                </div><!-- /header -->
                 <div data-role = "content" id="mainContent" >
-                    <form action="contents/server.php" method="post" onSubmit="return checkForm()" data-ajax="false" >
+                    <?php
+                    $u_agent = $_SERVER['HTTP_USER_AGENT'];
+
+                    if (!preg_match('/MSIE/i', $u_agent)) {
+                    ?>
+
+
                         <select class="dropfield ajax3" name="project_status" id="project_name" rowId="0" >
                             <option value="-1">Select a project status</option>
                             <option value="OPEN">OPEN</option>
@@ -201,14 +179,11 @@ if (isset($_POST['save']) || isset($_POST['save1'])) {
                         <hr/>
                         <br/>
 
-                        <input type="submit" value="save" name="save" rowId="0"  class="ajax4" data-role="button" data-icon="plus" />
-                        <a href="contents/reporting.php" target="_blank" data-ajax="false" data-role="button" data-icon="grid">Reporting</a>
-                    </form>
-                </div><!-- /content -->
-            <?php } else {
- ?>
-                <div data-role = "content" id="mainContent" >
-                    <form action="contents/server.php" method="post" onSubmit="return checkForm()" data-ajax="false" >
+
+                    <?php } else {
+                    ?>
+
+
                         <select class="dropfield ajax3" name="project_status" id="project_name" rowId="0" >
                             <option value="-1">Select a project status</option>
                             <option value="OPEN">OPEN</option>
@@ -358,86 +333,88 @@ if (isset($_POST['save']) || isset($_POST['save1'])) {
                         <hr/>
                         <br/>
 
-                        <input type="submit" value="Save" name="save" rowId="0"  class="ajax4" data-role="button" data-icon="plus" />
-                        <a href="contents/reporting_parvez.php" target="_blank" data-ajax="false" data-role="button" data-icon="grid">Reporting</a>
-                    </form>
 
-                </div><!-- /content -->
-            <?php } ?>
-            <div data-role="content">
-                <form action="" method="post"  data-ajax="false" >
-                    <div  data-role = "content" id="productSample" style="max-width:700px" >
 
-                        <div data-role="content">
-                            <div data-role="header" data-theme="d">
-                                <h1>Product Sample</h1>
+                    <?php } ?>
+                    <div data-role="content">
 
-                            </div
+                        <div  data-role = "content" id="productSample">
+
+                            <div data-role="content">
+                                <div data-role="header" data-theme="d">
+                                    <h1>Product Sample</h1>
+
+                                </div
 
 
 
-                            <button  type="button" data-icon="gear" data-theme="b" data-iconpos="right" data-mini="true" data-inline="true" id="add"><a data-mini="true" data-icon="gear"  data-theme="b" data-iconpos="right" id='lnkDialog' data-role="button" href="#aaa" data-rel="dialog" data-transition="pop" >Add Product Sample</a></button>
-             
-                            <div data-role="collapsible-set" data-content-theme="d" id="set" style="text-align: center">
-                                <div class="ui-grid-b">
-                                    <div class="ui-block-a" ><h4>Product</h4></div>
-                                    <div class="ui-block-b"><h4>Colour</h4></div>
-                                    <div class="ui-block-c"><h4>Finish</h4></div>
+                                <button  type="button" data-icon="gear" data-theme="b" data-iconpos="right" data-mini="true" data-inline="true" id="add"><a data-mini="true" data-icon="gear"  data-theme="b" data-iconpos="right" id='add' data-role="button" href="#aaa" data-rel="dialog" data-transition="pop" >Add Product Sample</a></button>
+
+                                <div data-role="collapsible-set" data-content-theme="d" id="set" style="text-align: center">
+                                    <div class="ui-grid-b">
+                                        <div class="ui-block-a" ><h4>Product</h4></div>
+                                        <div class="ui-block-b"><h4>Colour</h4></div>
+                                        <div class="ui-block-c"><h4>Finish</h4></div>
+                                    </div>
+                                    <?php
+                                    /*$project_id = 1;
+                                    $ssql = "SELECT * FROM sample_request where project_id='$project_id'";
+                                    $content = '';
+                                    $result = $database->query($ssql);
+                                    $nextId = 1;
+                                    if ($result) {
+                                        while ($row = mysql_fetch_array($result)) {
+                                            $value = $row['product'];
+                                            $finish = $row['finish'];
+                                            $colour = $row['colour'];
+                                            // $content.= "<div data-role='content' id='set".nextId."'><div class='ui-grid-b'><div class='ui-block-a'><input type='text' name='sproduct[]' placeholder='product' value='".$value."' /></div><div class='ui-block-b'><input type='text' name='colour[]'  placeholder='colour' value='$colour' /></div><div class='ui-block-c'><input type='text' name='finish[]'  placeholder='Finish' value='$finish'/></div></div></div>";
+                                            $content.= "<div data-role='content' id='set" . nextId . "'><div class='ui-grid-b'><div class='ui-block-a'><input type='text' name='sproduct[]' placeholder='product' value='" . $value . "' /></div>";
+                                            $content.="<div  class='ui-block-b'>" . coloue_input_html($colour) . "</div>";
+                                            $content.="<div class='ui-block-c'><input type='text' name='finish[]'  placeholder='Finish' value='$finish'/></div></div></div>";
+                                            $nextId++;
+                                        }
+                                    }*/
+                                    $content1.= "<div id='sri' data-role='content' id='set" . nextId . "'><div class='ui-grid-b'><div class='ui-block-a'><input type='text' name='sproduct[]' placeholder='product' value='" . "' /></div>";
+                                    $content1.="<div  class='ui-block-b'>" . coloue_input_html() . "</div>";
+                                    $content1.="<div class='ui-block-c'><input type='text' name='finish[]'  placeholder='Finish' value=''/></div></div></div>";
+                                    ?>
+                                    <?php //echo $content ?>
+                                    <?php echo $content1 ?>
                                 </div>
-                                <?php
-                                $project_id = 1;
-                                $ssql = "SELECT * FROM sample_request where project_id='$project_id'";
-                                $content = '';
-                                $result = $database->query($ssql);
-                                $nextId = 1;
-                                if ($result) {
-                                    while ($row = mysql_fetch_array($result)) {
-                                        $value = $row['product'];
-                                        $finish = $row['finish'];
-                                        $colour = $row['colour'];
-                                        // $content.= "<div data-role='content' id='set".nextId."'><div class='ui-grid-b'><div class='ui-block-a'><input type='text' name='product[]' placeholder='product' value='".$value."' /></div><div class='ui-block-b'><input type='text' name='colour[]'  placeholder='colour' value='$colour' /></div><div class='ui-block-c'><input type='text' name='finish[]'  placeholder='Finish' value='$finish'/></div></div></div>";
-                                        $content.= "<div data-role='content' id='set" . nextId . "'><div class='ui-grid-b'><div class='ui-block-a'><input type='text' name='product[]' placeholder='product' value='" . $value . "' /></div>";
-                                        $content.="<div  class='ui-block-b'>" . coloue_input_html($colour) . "</div>";
-                                        $content.="<div class='ui-block-c'><input type='text' name='finish[]'  placeholder='Finish' value='$finish'/></div></div></div>";
-                                        $nextId++;
-                                    }
-                                }
-                                $content1.= "<div data-role='content' id='set" . nextId . "'><div class='ui-grid-b'><div class='ui-block-a'><input type='text' name='product[]' placeholder='product' value='" . "' /></div>";
-                                $content1.="<div  class='ui-block-b'>" . coloue_input_html() . "</div>";
-                                $content1.="<div class='ui-block-c'><input type='text' name='finish[]'  placeholder='Finish' value=''/></div></div></div>";
-                                ?>
-                                <?php echo $content ?>
+                                <script>
+                                    $(document).on("pageinit", function() {
+
+                                        $("#sri").hide();
+                                        $("#add").click(function(e){
+                                            e.preventDefault();
+                                            var con=$("#sri").clone().html();
+                                            //$(con).attr('id', 'saveold')
+                                            $('#set').append(con);
+                                            return false;
+                                        });
+
+
+                                    });
+
+                                </script>
+
                             </div>
+
                         </div>
-                        <input type="submit" value="save" name="save"  />
-                    </div>
 
 
-                </form>
 
 
-            </div> 
-        </div> <!--page -->
-        <div id="aaa" data-role="dialog">
-            <form action="" method="post"  data-ajax="false" >
-                <div data-role="header" data-theme="d">
-                    <h1>Product sample</h1>
-
-                </div>
-                <div data-role="content" data-theme="c">
-                    <div class="ui-grid-b">
-                        <label for="originator">Product</label><input type="text" name="product[]" id="product" placeholder="product" />
-                        <label for="Colour">Colour</label><?php echo coloue_input_html() ?>
-                        <label for="Finish">Finish</label><input type="text" name="product[]" id="finish" placeholder="finish" />
 
                     </div>
-                    <input type="submit" value="save" name="save1"  />
 
-                    <a href="dialog/index.html" data-role="button" data-rel="back" data-theme="c">Cancel</a>
-                </div>
-            </form>
-        </div>
 
+                    <input type="submit" value="Save" name="save" rowId="0"  class="ajax4" data-role="button" data-icon="plus" />
+                    <a href="contents/reporting_parvez.php" target="_blank" data-ajax="false" data-role="button" data-icon="grid">Reporting</a>
+                </div><!-- /content -->
+            </div> <!--page -->
+
+        </form>
     </body>
 
 </html>

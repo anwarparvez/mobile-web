@@ -12,7 +12,7 @@ require_once('../include/database.php');
         <div class="ui-block-c"><h4>Finish</h4></div>
     </div>
     <?php
-    $project_id = 1;
+    //$project_id = 1;
     $ssql = "SELECT * FROM sample_request where project_id='$project_id'";
     $content = '';
     $result = $database->query($ssql);

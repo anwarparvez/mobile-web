@@ -494,8 +494,9 @@ require_once('../include/database.php');
 				<div class="ajax6 hide"><input type="date" name="job_entered" placeholder="dd/mm/yyyy" value="' . $row['job_entered'] . '" rowId="' . $row['ID'] . '"  '; ?> data-role="datebox" data-options='{"mode": "calbox"}'<?php
             echo'/></div></td>';
         }
-        echo '<td> <a href="#dialog"  data-rel="dialog" data-role="button" >sample</a></td>';
+        echo '<td> <a href="sample_summary.php?pid='.$row['ID'].'&name='.$row['originator'].'"  data-rel="dialog" data-ajax="false" data-role="button" >sample</a></td>';
         echo "</tr>";
+        $project_id = $row['ID'];
     } // while $result
     ?>
 </table>

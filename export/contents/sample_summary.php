@@ -2,6 +2,11 @@
 <?php
 require_once('../include/database.php');
 require_once 'helper.php';
+if (isset($_GET['pid'])) {
+    $project_id = $_GET['pid'];
+} else {
+    $project_id = 1;
+}
 if (isset($_POST['save'])) {
     $product = $_POST['product'];
     $project_id = 1;
@@ -52,7 +57,8 @@ if (isset($_POST['save'])) {
                     <?php
                     require_once('../include/database.php');
                     $originator = "anwar";
-                    $project_id = 1;
+
+                    ;
                     ?>
                     <?php
                     $ssql = "SELECT * FROM sample_request where project_id='$project_id'";
@@ -68,7 +74,7 @@ if (isset($_POST['save'])) {
                     ?>
                             <li>
                                 <p>
-                                    James hardle
+                                <?php echo $_GET['name'] ?>
                                 <?php echo $value ?>
                                 <?php echo get_colour($colour) ?>
                                 <?php echo $finish ?>
@@ -83,7 +89,7 @@ if (isset($_POST['save'])) {
 
                 </div>
                 <div id="bt" class="ui-grid-a">
-                    <div class="ui-block-a"> <a id="finish" href="reporting.php" data-role="button"data-rel="back" data-theme="b"  >Finish And Submit</a></div>
+                    <div class="ui-block-a"> <a id="finish" href="reporting.php" data-role="button" data-ajax="false"  data-theme="b"  >Finish And Submit</a></div>
                     <div class="ui-block-b"><a id="edit"href="#" data-role="button"  data-theme="c">Edit Sample Request</a></div>
                 </div>
 
