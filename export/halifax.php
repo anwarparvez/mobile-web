@@ -374,9 +374,9 @@ require_once ('contents/helper.php');
                                             $nextId++;
                                         }
                                     }*/
-                                    $content1.= "<div id='sri' data-role='content' id='set" . nextId . "'><div class='ui-grid-b'><div class='ui-block-a'><input type='text' name='sproduct[]' placeholder='product' value='" . "' /></div>";
+                                    $content1.= "<div id='sri'><div  data-role='content' id='set" . nextId . "'><div class='ui-grid-b'><div class='ui-block-a'><input type='text' name='sproduct[]' placeholder='product' value='" . "' /></div>";
                                     $content1.="<div  class='ui-block-b'>" . coloue_input_html() . "</div>";
-                                    $content1.="<div class='ui-block-c'><input type='text' name='finish[]'  placeholder='Finish' value=''/></div></div></div>";
+                                    $content1.="<div class='ui-block-c'><input type='text' name='finish[]'  placeholder='Finish' value=''/></div></div></div></div>";
                                     ?>
                                     <?php //echo $content ?>
                                     <?php echo $content1 ?>
