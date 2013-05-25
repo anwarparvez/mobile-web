@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<?php require_once 'helper.php';;?>
 <html>
     <head>
         <meta charset="utf-8">
@@ -43,7 +44,7 @@
                             <p>
                                 James hardle
                                         <?php echo $value?>
-                                        <?php echo $colour?>
+                                        <?php echo get_colour($colour)?>
                                         <?php echo $finish?>
                             </p>
                         </li>
