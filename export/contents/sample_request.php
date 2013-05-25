@@ -61,32 +61,14 @@ if(isset ($_POST['save'])) {
 
                         <button type="button" data-icon="gear" data-theme="b" data-iconpos="right" data-mini="true" data-inline="true" id="add">Add</button>
 
-                        <div data-role="collapsible-set" data-content-theme="d" id="set">
+                        <div data-role="collapsible-set" data-content-theme="d" style="text-align: center" id="set">
                             <div class="ui-grid-b">
                                 <div class="ui-block-a"><h4>Product</h4></div>
                                 <div class="ui-block-b"><h4>Colour</h4></div>
                                 <div class="ui-block-c"><h4>Finish</h4></div>
                             </div>
                                 <?php
-                               /* function sample_product_html($project_id=1) {
-                                    $ssql="SELECT * FROM sample_request where project_id='$project_id'";
-                                    $content='';
-                                    $result = $database->query($ssql);
-                                    $nextId=1;
-                                    if($result) {
-                                        while ($row = mysql_fetch_array($result)) {
-
-                                            $value=$row['product'];
-                                            $finish=$row['finish'];
-                                            $colour=$row['colour'];
-                                            $content.= "<div data-role='content' id='set".nextId."'><div class='ui-grid-b'><div class='ui-block-a'><input type='text' name='product[]' placeholder='product' value='".$value."' /></div>";
-                                            $content.="<div class='ui-block-b'>".coloue_input_html(1)."</div>";
-                                            $content.="<div class='ui-block-c'><input type='text' name='finish[]'  placeholder='Finish' value='$finish'/></div></div></div>";
-                                            $nextId++;
-                                        }
-                                    }
-                                    return $content;
-                                }*/
+                              
                                 $project_id=1;
                                 $ssql="SELECT * FROM sample_request where project_id='$project_id'";
                                 $content='';
@@ -117,13 +99,16 @@ if(isset ($_POST['save'])) {
                                         var content = "<div data-role='content' id='set" + nextId + "'><div class='ui-grid-b'><div class='ui-block-a'><input type='text' name='product[]' placeholder='product'  /></div><div class='ui-block-b'><?php echo coloue_input_html()?></div><div class='ui-block-c'><input type='text' name='finish[]'  placeholder='Finish' /></div></div></div>";
 
                                         $("#set").append( content ).collapsibleset('refresh');
+                                        history.back();
                                     });
+
+                                    $
 
                                 });
                             </script>
 
                     </div>
-                    <input type="submit" value="save" name="save"  />
+                    <input id="samplesave" type="submit" value="save" name="save"  />
                 </div>
 
             </form>

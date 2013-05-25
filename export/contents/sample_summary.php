@@ -1,5 +1,32 @@
 <!DOCTYPE html>
-<?php require_once 'helper.php';;?>
+<?php
+require_once('../include/database.php');
+require_once 'helper.php';
+if (isset($_POST['save'])) {
+    $product = $_POST['product'];
+    $project_id = 1;
+    $i = 0;
+    $dsql = "DELETE FROM sample_request where project_id = '$project_id' ";
+    $database->query($dsql);
+    foreach ($product as $value) {
+        if ($value != NULL) {
+            // echo $value;
+            $colour = $_POST['colour'][$i];
+            $finish = $_POST['finish'][$i];
+
+            $sql = "INSERT INTO sample_request (_id ,project_id ,product ,colour ,finish) VALUES (NULL , '$project_id', '$value', '$colour', '$finish');";
+
+            //echo $sql;
+            $database->query($sql);
+            $i++;
+            //echo "Found";
+        }
+    }
+    /* echo '<script type="text/javascript">
+      window.location="reporting.php";
+      </script>"'; */
+}
+?>
 <html>
     <head>
         <meta charset="utf-8">
@@ -12,54 +39,83 @@
 
     </head>
     <body>
-        <div data-role="dialog">
+        <div id="dialog" data-role="dialog">
             <div data-role="header" data-theme="d">
                 <h1>Sample Request Summary</h1>
 
             </div>
 
-            <div data-role="content" data-theme="c">
-
+            <div  data-role="content" data-theme="c">
                 <h1>Sample Request Summary</h1>
-                <div data-role="content">
+                <div></div>
+                <div id="sc" data-role="content">
                     <?php
-
                     require_once('../include/database.php');
-                    $originator="anwar";
-                    $project_id=1;
+                    $originator = "anwar";
+                    $project_id = 1;
                     ?>
                     <?php
-                    $ssql="SELECT * FROM sample_request where project_id='$project_id'";
+                    $ssql = "SELECT * FROM sample_request where project_id='$project_id'";
 
                     $result = $database->query($ssql);
-                    $nextId=1;
+                    $nextId = 1;
                     ?><ol><?php
-                        if($result) {
-                            while ($row = mysql_fetch_array($result)) {
-                                $value=$row['product'];
-                                $finish=$row['finish'];
-                                $colour=$row['colour'];
-                                ?>
-                        <li>
-                            <p>
-                                James hardle
-                                        <?php echo $value?>
-                                        <?php echo get_colour($colour)?>
-                                        <?php echo $finish?>
+                    if ($result) {
+                        while ($row = mysql_fetch_array($result)) {
+                            $value = $row['product'];
+                            $finish = $row['finish'];
+                            $colour = $row['colour'];
+                    ?>
+                            <li>
+                                <p>
+                                    James hardle
+                                <?php echo $value ?>
+                                <?php echo get_colour($colour) ?>
+                                <?php echo $finish ?>
                             </p>
                         </li>
-                                <?php
-
-                                $nextId++;}
+                        <?php
+                                $nextId++;
+                            }
                         }
                         ?>
                     </ol>
+
                 </div>
-                <div class="ui-grid-a">
-                    <div class="ui-block-a"> <a href="reporting.php" data-role="button"data-rel="back" data-theme="b"  >Finish And Submit</a></div>
-                    <div class="ui-block-b"><a href="sample_request.php" data-role="button"  data-theme="c">Edit Sample Request</a></div>
+                <div id="bt" class="ui-grid-a">
+                    <div class="ui-block-a"> <a id="finish" href="reporting.php" data-role="button"data-rel="back" data-theme="b"  >Finish And Submit</a></div>
+                    <div class="ui-block-b"><a id="edit"href="#" data-role="button"  data-theme="c">Edit Sample Request</a></div>
                 </div>
+
+                <div id="se" data-role="content" data-theme="c" style="display: none">
+                    <?php include 'sr.php'; ?>
+
+                </div>
+
             </div>
         </div>
+        <script>
+            $(document).on("pageinit", function() {
+
+                $("#se").hide();
+                $("#add").click(function(e){
+                    e.preventDefault();
+                    var con=$("#sri").clone().html();
+                    //$(con).attr('id', 'saveold')
+                    $('#inputdata').append(con);
+                    return false;
+                });
+                 
+                $("#edit").click(function(e){
+                    e.preventDefault();
+                    $("#se").show();
+                    $("#sc").hide();
+                    $("#finish").hide();
+                    $(this).hide();
+                   
+                });
+            });
+
+        </script>
     </body>
 </html>

@@ -29,6 +29,8 @@ function coloue_input_html($selcted=0) {
         'Rouge ChromaShield&trade; 212',
         'Turquoise ChromaShield&trade; 213',
         'Turquoise ChromaShield&trade; 213');
+
+
     $html="<select name='colour[]' class='dropfield' >";
     $i=0;
     foreach ($colour_array as $value) {
@@ -39,6 +41,8 @@ function coloue_input_html($selcted=0) {
         $i++;
     }
     $html.="</select>";
+
+    //$html="<div data-role='fieldcontain'><label for='select-restaurants'>Select Your Restaurants:</label><select id='select-restaurants' name='select-restaurants' data-native-menu='false' multiple='multiple'data-theme='e'><option value='choose' data-placeholder='true'>Choose...</option></select></div>";
     return $html;
 
 }

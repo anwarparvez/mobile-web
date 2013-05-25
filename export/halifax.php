@@ -205,7 +205,8 @@ if (isset($_POST['save']) || isset($_POST['save1'])) {
                         <a href="contents/reporting.php" target="_blank" data-ajax="false" data-role="button" data-icon="grid">Reporting</a>
                     </form>
                 </div><!-- /content -->
-            <?php } else { ?>
+            <?php } else {
+ ?>
                 <div data-role = "content" id="mainContent" >
                     <form action="contents/server.php" method="post" onSubmit="return checkForm()" data-ajax="false" >
                         <select class="dropfield ajax3" name="project_status" id="project_name" rowId="0" >
@@ -362,8 +363,7 @@ if (isset($_POST['save']) || isset($_POST['save1'])) {
                     </form>
 
                 </div><!-- /content -->
-            <?php }
-            ?>
+            <?php } ?>
             <div data-role="content">
                 <form action="" method="post"  data-ajax="false" >
                     <div  data-role = "content" id="productSample" style="max-width:700px" >
@@ -377,10 +377,10 @@ if (isset($_POST['save']) || isset($_POST['save1'])) {
 
 
                             <button  type="button" data-icon="gear" data-theme="b" data-iconpos="right" data-mini="true" data-inline="true" id="add"><a data-mini="true" data-icon="gear"  data-theme="b" data-iconpos="right" id='lnkDialog' data-role="button" href="#aaa" data-rel="dialog" data-transition="pop" >Add Product Sample</a></button>
-
-                            <div data-role="collapsible-set" data-content-theme="d" id="set">
+             
+                            <div data-role="collapsible-set" data-content-theme="d" id="set" style="text-align: center">
                                 <div class="ui-grid-b">
-                                    <div class="ui-block-a"><h4>Product</h4></div>
+                                    <div class="ui-block-a" ><h4>Product</h4></div>
                                     <div class="ui-block-b"><h4>Colour</h4></div>
                                     <div class="ui-block-c"><h4>Finish</h4></div>
                                 </div>
