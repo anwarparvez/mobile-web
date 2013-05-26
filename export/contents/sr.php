@@ -34,7 +34,7 @@ require_once('../include/database.php');
     $content1.="<div class='ui-block-c'><input type='text' name='finish[]'  placeholder='Finish' value=''/></div></div></div></div>";
     ?>
     <?php echo $content ?>
-    <?php echo $content1 ?>
+    <?php //echo $content1 ?>
 </div>
   <input type="submit" value="save" name="save"  />
 </form>

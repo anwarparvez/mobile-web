@@ -93,7 +93,7 @@ if(isset ($_POST['save'])) {
                                     var nextId = <?php echo $nextId?>;
 
                                     var scontent = "<?php echo $content ?>";
-                                    $("#set").append( scontent ).collapsibleset('refresh');
+                                    $("#set").append( scontent ).collapsibleset('refresh').trigger('create');;
                                     $("#add").click(function() {
                                         nextId++;
                                         var content = "<div data-role='content' id='set" + nextId + "'><div class='ui-grid-b'><div class='ui-block-a'><input type='text' name='product[]' placeholder='product'  /></div><div class='ui-block-b'><?php echo coloue_input_html()?></div><div class='ui-block-c'><input type='text' name='finish[]'  placeholder='Finish' /></div></div></div>";

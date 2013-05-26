@@ -103,15 +103,14 @@ if (isset($_POST['save'])) {
         <script>
             $(document).on("pageinit", function() {
 
+            var scontent = "<?php echo $content1 ?>";
+                    $("#add").click(function(e){
+                        e.preventDefault();
+                        $('#inputdata').append(scontent).trigger('create');
+                        return false;
+                    });
                 $("#se").hide();
-                $("#add").click(function(e){
-                    e.preventDefault();
-                    var con=$("#sri").clone().html();
-                    //$(con).attr('id', 'saveold')
-                    $('#inputdata').append(con);
-                    return false;
-                });
-                 
+  
                 $("#edit").click(function(e){
                     e.preventDefault();
                     $("#se").show();
