@@ -1,6 +1,6 @@
 <?php
 
-function coloue_input_html($selcted=0) {
+function coloue_input_html($selcted=0,$row=0) {
     $colour_array=array(
         'Select a colour',
         'Blanc ChromaShield&trade; 201',
@@ -31,7 +31,7 @@ function coloue_input_html($selcted=0) {
         'Turquoise ChromaShield&trade; 213');
 
 
-    $html="<select name='colour[]' class='dropfield' >";
+    $html="<select row='$row' name='colour[]' class='colorbox dropfield' >";
     $i=0;
     foreach ($colour_array as $value) {
         if($i==$selcted)
